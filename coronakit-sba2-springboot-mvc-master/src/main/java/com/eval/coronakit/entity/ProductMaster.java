@@ -21,6 +21,7 @@ public class ProductMaster {
 	@Size(min=2,message = "Product Name should have at least 2 chars")
 	private String productName;
 	
+	@NotNull(message = "Product Cost is requried")
 	@Min(value = 10,message = "Cost can not be less than 10 rupees")
 	private Integer cost;
 	

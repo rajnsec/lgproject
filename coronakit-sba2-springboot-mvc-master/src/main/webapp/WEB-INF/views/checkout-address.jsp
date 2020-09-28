@@ -33,7 +33,7 @@
 
 <div class="form-group">
   <label for="comment">Enter Delivery Address:</label>
-  <textarea class="form-control" rows="5" id="address" name="address""></textarea>
+  <textarea class="form-control" rows="5" id="address" name="address" required></textarea>
 </div>
 		
 		
