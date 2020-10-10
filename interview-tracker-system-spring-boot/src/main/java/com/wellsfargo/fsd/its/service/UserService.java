@@ -10,8 +10,8 @@ public interface UserService {
 	User add(User user) throws ITSException;
 	User save(User user) throws ITSException;
 	
-	boolean deleteContact(int contactId) throws ITSException;
+	boolean deleteUser(int userId) throws ITSException;
 	
-	User getContact(int contactId) throws ITSException;
-	List<User> getAllContacts() throws ITSException;
+	User getUser(int userId) throws ITSException;
+	List<User> getAllUsers() throws ITSException;
 }

@@ -15,57 +15,53 @@ import com.wellsfargo.fsd.its.exception.ITSException;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository contactRepo;
+	private UserRepository userRepo;
 
 	@Override
 	@Transactional
-	public User add(User contact) throws ITSException {
-		if (contact != null) {
-			if (contactRepo.existsById(contact.getContactId())) {
-				throw new ITSException("Contact Id is already in use");
-			}
-			
-			if (contactRepo.existsByMobile(contact.getMobile())) {
-				throw new ITSException("Mobile is already in use");
+	public User add(User user) throws ITSException {
+		if (user != null) {
+			if (userRepo.existsById(user.getUserId())) {
+				throw new ITSException("User Id is already in use");
 			}
 
-			contactRepo.save(contact);
+			userRepo.save(user);
 		}
-		return contact;
+		return user;
 	}
 
 	@Override
 	@Transactional
 	public User save(User contact) throws ITSException {
 		if (contact != null) {
-			if (!contactRepo.existsById(contact.getContactId())) {
-				throw new ITSException("Contact Id is not found");
+			if (!userRepo.existsById(contact.getUserId())) {
+				throw new ITSException("User Id is not found");
 			}
 
-			contactRepo.save(contact);
+			userRepo.save(contact);
 		}
 		return contact;
 	}
 
 	@Override
 	@Transactional
-	public boolean deleteContact(int contactId) throws ITSException {
-		if (!contactRepo.existsById(contactId)) {
+	public boolean deleteUser(int userId) throws ITSException {
+		if (!userRepo.existsById(userId)) {
 			throw new ITSException("Contact Id is not found");
 		}
 		
-		contactRepo.deleteById(contactId);
+		userRepo.deleteById(userId);
 		return true;
 	}
 
 	@Override
-	public User getContact(int contactId) throws ITSException {
-		return contactRepo.findById(contactId).orElse(null);
+	public User getUser(int userId) throws ITSException {
+		return userRepo.findById(userId).orElse(null);
 	}
 
 	@Override
-	public List<User> getAllContacts() throws ITSException {
-		return contactRepo.findAll();
+	public List<User> getAllUsers() throws ITSException {
+		return userRepo.findAll();
 	}
 
 }

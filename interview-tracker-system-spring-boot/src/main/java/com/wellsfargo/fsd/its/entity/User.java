@@ -2,117 +2,98 @@ package com.wellsfargo.fsd.its.entity;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name="contacts")
+@Table(name="users")
 public class User {
 	
 	@Id
-	@NotNull(message = "Contact Id is requried")
-	@Min(value = 1,message = "Contact Id cna not be zero or negative")
-	private Integer contactId;
+	private Integer userId;
 	
-	@Column(name="fnm")
-	@NotNull(message = "Full Naem is requried")
-	@NotBlank(message = "Full Naem is requried")
-	@Size(min=5,max=25,message = "Full Naem is requried to be of 5 to 25 chars in length")
-	private String fullName;
+	private String firstName;
 	
-	@Column(name="dob")
-	@DateTimeFormat(iso=ISO.DATE)
-	@PastOrPresent(message = "Date Of Birth can not be a future date")
-	private LocalDate dateOfBirth;
+	private String lastName;
 	
-	@Column(name="mno")
-	@NotNull(message = "Mobile Number is requried")
-	@NotBlank(message = "Mobile Number is requried")	
-	@Pattern(regexp = "[1-9][0-9]{9}",message = "Mobile Number should be of 10 digits only")
+	private String email;
+	
 	private String mobile;
 	
-	@Column(name="grp")		
-	private String group;
-	
-	@Column(name="married")
-	private Boolean married;
 	
 	public User() {
 		//left unimplemented.
 	}
 
-	public User(Integer contactId, String fullName, LocalDate dateOfBirth, String mobile) {
+
+	public User(Integer userId, String firstName, String lastName, String email, String mobile) {
 		super();
-		this.contactId = contactId;
-		this.fullName = fullName;
-		this.dateOfBirth = dateOfBirth;
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
 		this.mobile = mobile;
 	}
 
-	public Integer getContactId() {
-		return contactId;
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setContactId(Integer contactId) {
-		this.contactId = contactId;
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public String getFullName() {
-		return fullName;
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
+
+	public String getLastName() {
+		return lastName;
 	}
 
-	public String getGroup() {
-		return group;
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public void setGroup(String group) {
-		this.group = group;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public Boolean getMarried() {
-		return married;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public void setMarried(Boolean married) {
-		this.married = married;
-	}
-
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
 
 	public String getMobile() {
 		return mobile;
 	}
 
+
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Contact [contactId=" + contactId + ", fullName=" + fullName + ", dateOfBirth=" + dateOfBirth
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", mobile=" + mobile + "]";
 	}
+
 	
 	
 }

@@ -18,8 +18,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	User findByMobile(String mobile);
 	
-	List<User> findAllByGroup(String group);
 	
-	@Query("SELECT c FROM User c WHERE c.dateOfBirth BETWEEN :start and :end")
-	List<User> findAllBornInRange(@DateTimeFormat(iso=ISO.DATE) LocalDate start,@DateTimeFormat(iso=ISO.DATE) LocalDate end);
 }

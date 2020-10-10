@@ -19,7 +19,7 @@ import com.wellsfargo.fsd.its.exception.ITSException;
 import com.wellsfargo.fsd.its.service.UserService;
 
 @RestController
-@RequestMapping("/contacts")
+@RequestMapping("/users")
 public class UserRestController {
 
 	@Autowired
@@ -27,14 +27,14 @@ public class UserRestController {
 
 	@GetMapping
 	public ResponseEntity<List<User>> getAllContacts() throws ITSException{
-		return new ResponseEntity<List<User>>(userService.getAllContacts(),HttpStatus.OK);
+		return new ResponseEntity<List<User>>(userService.getAllUsers(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getContacts(@PathVariable("id") int cid) throws ITSException{
+	public ResponseEntity<User> getUsers(@PathVariable("id") int uid) throws ITSException{
 		ResponseEntity<User> resp=null;
 		
-		User user = userService.getContact(cid);
+		User user = userService.getUser(uid);
 		
 		if(user != null) {
 			resp = new ResponseEntity<User>(user,HttpStatus.OK);
@@ -45,18 +45,18 @@ public class UserRestController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteContacts(@PathVariable("id") int cid) throws ITSException{
-		userService.deleteContact(cid);
+	public ResponseEntity<Void> deleteUsers(@PathVariable("id") int uid) throws ITSException{
+		userService.deleteUser(uid);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> addContact(@RequestBody User user) throws ITSException{
+	public ResponseEntity<User> addUser(@RequestBody User user) throws ITSException{
 		return new ResponseEntity<User>(userService.add(user),HttpStatus.OK);
 	} 
 	
 	@PutMapping
-	public ResponseEntity<User> updateContact(@RequestBody User user) throws ITSException{
+	public ResponseEntity<User> updateUser(@RequestBody User user) throws ITSException{
 		return new ResponseEntity<User>(userService.save(user),HttpStatus.OK);
 	} 
 }
