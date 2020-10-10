@@ -14,9 +14,6 @@ import com.wellsfargo.fsd.its.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	boolean existsByMobile(String mobile);
-	
-	User findByMobile(String mobile);
-	
+
 	
 }

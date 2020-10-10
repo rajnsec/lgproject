@@ -26,7 +26,7 @@ public class UserRestController {
 	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<User>> getAllContacts() throws ITSException{
+	public ResponseEntity<List<User>> getAllUsers() throws ITSException{
 		return new ResponseEntity<List<User>>(userService.getAllUsers(),HttpStatus.OK);
 	}
 	

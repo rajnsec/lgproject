@@ -32,22 +32,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User save(User contact) throws ITSException {
-		if (contact != null) {
-			if (!userRepo.existsById(contact.getUserId())) {
+	public User save(User user) throws ITSException {
+		if (user != null) {
+			if (!userRepo.existsById(user.getUserId())) {
 				throw new ITSException("User Id is not found");
 			}
 
-			userRepo.save(contact);
+			userRepo.save(user);
 		}
-		return contact;
+		return user;
 	}
 
 	@Override
 	@Transactional
 	public boolean deleteUser(int userId) throws ITSException {
 		if (!userRepo.existsById(userId)) {
-			throw new ITSException("Contact Id is not found");
+			throw new ITSException("User Id is not found");
 		}
 		
 		userRepo.deleteById(userId);
