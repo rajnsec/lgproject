@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wellsfargo.fsd</groupId>
-	<artifactId>cms-spring-web-data</artifactId>
+	<artifactId>interview-tracker-system-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>cms-spring-web-data</name>
-	<description>Demo project for Spring Boot</description>
+	<name>interview-tracker-system-spring-boot</name>
+	<description>interview-tracker-system-spring-boot for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
