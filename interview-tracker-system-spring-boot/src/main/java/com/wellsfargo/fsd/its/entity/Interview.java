@@ -1,16 +1,23 @@
 package com.wellsfargo.fsd.its.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="interviews")
-public class Interview {
+public class Interview implements Serializable {
 	
 	@Id
 	private Integer interviewId;
@@ -28,6 +35,9 @@ public class Interview {
 	private String interviewStatus;
 	
 	private String remarks;
+	
+	@OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,fetch = FetchType.LAZY )
+	private Set<User> users;
 
 	public Interview() {
 		
@@ -35,7 +45,7 @@ public class Interview {
 	}
 
 	public Interview(Integer interviewId, String interviewerName, String interviewName, String usersSkills,
-			LocalTime time, LocalDate date, String interviewStatus, String remarks) {
+			LocalTime time, LocalDate date, String interviewStatus, String remarks, Set<User> users) {
 		super();
 		this.interviewId = interviewId;
 		this.interviewerName = interviewerName;
@@ -45,6 +55,7 @@ public class Interview {
 		this.date = date;
 		this.interviewStatus = interviewStatus;
 		this.remarks = remarks;
+		this.users = users;
 	}
 
 	public Integer getInterviewId() {
@@ -111,15 +122,21 @@ public class Interview {
 		this.remarks = remarks;
 	}
 
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 	@Override
 	public String toString() {
 		return "Interview [interviewId=" + interviewId + ", interviewerName=" + interviewerName + ", interviewName="
 				+ interviewName + ", usersSkills=" + usersSkills + ", time=" + time + ", date=" + date
-				+ ", interviewStatus=" + interviewStatus + ", remarks=" + remarks + "]";
+				+ ", interviewStatus=" + interviewStatus + ", remarks=" + remarks + ", users=" + users + "]";
 	}
-	
-	
-	
+
 	
 	
 	
