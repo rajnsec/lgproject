@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.fsd.its.entity.User;
 import com.wellsfargo.fsd.its.exception.ITSException;
+import com.wellsfargo.fsd.its.service.InterviewService;
 import com.wellsfargo.fsd.its.service.UserService;
 
 @RestController
@@ -24,6 +25,9 @@ public class UserRestController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private InterviewService interviewService;
 
 	@GetMapping
 	public ResponseEntity<List<User>> getAllUsers() throws ITSException{
@@ -46,6 +50,8 @@ public class UserRestController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteUsers(@PathVariable("id") int uid) throws ITSException{
+		User user =userService.getUser(uid);
+		interviewService.removeUserFromInterviews(user);
 		userService.deleteUser(uid);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

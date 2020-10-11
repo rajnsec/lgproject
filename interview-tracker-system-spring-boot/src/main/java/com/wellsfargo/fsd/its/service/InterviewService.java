@@ -3,6 +3,7 @@ package com.wellsfargo.fsd.its.service;
 import java.util.List;
 
 import com.wellsfargo.fsd.its.entity.Interview;
+import com.wellsfargo.fsd.its.entity.User;
 import com.wellsfargo.fsd.its.exception.ITSException;
 
 public interface InterviewService {
@@ -14,5 +15,7 @@ public interface InterviewService {
 	
 	Interview getInterview(int interviewId) throws ITSException;
 	List<Interview> getAllInterviews() throws ITSException;
+	
+	void removeUserFromInterviews(User user) throws ITSException;
 
 }

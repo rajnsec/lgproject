@@ -10,6 +10,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +27,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "interviews"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "interviews"})
 public class User implements Serializable{
 	
 	@Id
@@ -39,10 +41,8 @@ public class User implements Serializable{
 	private String email;
 	
 	private String mobile;
-
-	@ManyToMany(mappedBy="users", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	
-	@JsonIgnore
+//, cascade= CascadeType.ALL
+	@ManyToMany(mappedBy="users", fetch = FetchType.LAZY)	
 	private Set<Interview> interviews=new HashSet<>();
 
 	public Integer getUserId() {

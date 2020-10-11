@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,7 +48,7 @@ public class Interview implements Serializable {
 	private String remarks;
 	
 	@ManyToMany
-	@JoinTable(name="interviews_attendees", joinColumns=@JoinColumn(name="interviewId"),inverseJoinColumns=@JoinColumn(name="userId"))
+	@JoinTable(name="interviews_attendees", joinColumns=@JoinColumn(name="interviewId"),inverseJoinColumns=@JoinColumn(name="userId"))	
 	private Set<User> users=new HashSet<>();
 
 	public Integer getInterviewId() {
