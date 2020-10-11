@@ -1,25 +1,33 @@
 package com.wellsfargo.fsd.its.entity;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 
 @Entity
-@Table(name="interviews")
-public class Interview implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class Interview {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer interviewId;
 	
 	private String interviewerName;
@@ -36,27 +44,9 @@ public class Interview implements Serializable {
 	
 	private String remarks;
 	
-	@OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,fetch = FetchType.LAZY )
-	private Set<User> users;
-
-	public Interview() {
-		
-		// TODO Auto-generated constructor stub
-	}
-
-	public Interview(Integer interviewId, String interviewerName, String interviewName, String usersSkills,
-			LocalTime time, LocalDate date, String interviewStatus, String remarks, Set<User> users) {
-		super();
-		this.interviewId = interviewId;
-		this.interviewerName = interviewerName;
-		this.interviewName = interviewName;
-		this.usersSkills = usersSkills;
-		this.time = time;
-		this.date = date;
-		this.interviewStatus = interviewStatus;
-		this.remarks = remarks;
-		this.users = users;
-	}
+	@ManyToMany
+	@JoinTable(name="interviews_attendees", joinColumns=@JoinColumn(name="interviewId"),inverseJoinColumns=@JoinColumn(name="userId"))
+	private List<User> users=new ArrayList<>();
 
 	public Integer getInterviewId() {
 		return interviewId;
@@ -122,11 +112,11 @@ public class Interview implements Serializable {
 		this.remarks = remarks;
 	}
 
-	public Set<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
@@ -135,7 +125,7 @@ public class Interview implements Serializable {
 		return "Interview [interviewId=" + interviewId + ", interviewerName=" + interviewerName + ", interviewName="
 				+ interviewName + ", usersSkills=" + usersSkills + ", time=" + time + ", date=" + date
 				+ ", interviewStatus=" + interviewStatus + ", remarks=" + remarks + ", users=" + users + "]";
-	}
+	};
 
 	
 	
