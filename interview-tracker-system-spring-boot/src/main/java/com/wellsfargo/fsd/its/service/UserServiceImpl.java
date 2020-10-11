@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellsfargo.fsd.its.dao.UserRepository;
+import com.wellsfargo.fsd.its.dto.UserDTO;
 import com.wellsfargo.fsd.its.entity.User;
 import com.wellsfargo.fsd.its.exception.ITSException;
 
@@ -62,6 +63,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() throws ITSException {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public UserDTO entityToDto(User user) throws ITSException {
+		// TODO Auto-generated method stub
+		UserDTO userDTO=new UserDTO();
+		userDTO.setUserId(user.getUserId());
+		userDTO.setFirstName(user.getFirstName());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setEmail(user.getEmail());
+		userDTO.setMobile(user.getMobile());
+		return userDTO;
+	}
+
+	@Override
+	public User DtoToEntity(UserDTO userDTO) throws ITSException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

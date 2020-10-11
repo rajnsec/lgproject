@@ -2,7 +2,9 @@ package com.wellsfargo.fsd.its.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "interviews"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "interviews"})
 public class User implements Serializable{
 	
 	@Id
@@ -36,9 +39,11 @@ public class User implements Serializable{
 	private String email;
 	
 	private String mobile;
+
+	@ManyToMany(mappedBy="users", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	
-	@ManyToMany(mappedBy="users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Interview> interviews=new ArrayList<>();
+	@JsonIgnore
+	private Set<Interview> interviews=new HashSet<>();
 
 	public Integer getUserId() {
 		return userId;
@@ -80,11 +85,11 @@ public class User implements Serializable{
 		this.mobile = mobile;
 	}
 
-	public List<Interview> getInterviews() {
+	public Set<Interview> getInterviews() {
 		return interviews;
 	}
 
-	public void setInterviews(List<Interview> interviews) {
+	public void setInterviews(Set<Interview> interviews) {
 		this.interviews = interviews;
 	}
 

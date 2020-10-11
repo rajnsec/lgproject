@@ -1,35 +1,22 @@
-package com.wellsfargo.fsd.its.entity;
+package com.wellsfargo.fsd.its.dto;
 
-
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import com.wellsfargo.fsd.its.entity.Interview;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-
-
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "users"})
-public class Interview implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class InterviewDTO {
 	
-	@Id
-	private Integer interviewId;
+private Integer interviewId;
 	
 	private String interviewerName;
 	
@@ -44,10 +31,6 @@ public class Interview implements Serializable {
 	private String interviewStatus;
 	
 	private String remarks;
-	
-	@ManyToMany
-	@JoinTable(name="interviews_attendees", joinColumns=@JoinColumn(name="interviewId"),inverseJoinColumns=@JoinColumn(name="userId"))
-	private Set<User> users=new HashSet<>();
 
 	public Integer getInterviewId() {
 		return interviewId;
@@ -112,24 +95,5 @@ public class Interview implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-	@Override
-	public String toString() {
-		return "Interview [interviewId=" + interviewId + ", interviewerName=" + interviewerName + ", interviewName="
-				+ interviewName + ", usersSkills=" + usersSkills + ", time=" + time + ", date=" + date
-				+ ", interviewStatus=" + interviewStatus + ", remarks=" + remarks + ", users=" + users + "]";
-	};
-
-	
-	
-	
 
 }
