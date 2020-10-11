@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User add(User user) throws ITSException {
+	public User addUser(User user) throws ITSException {
 		if (user != null) {
 			if (userRepo.existsById(user.getUserId())) {
 				throw new ITSException("User Id is already in use");
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User save(User user) throws ITSException {
+	public User saveUser(User user) throws ITSException {
 		if (user != null) {
 			if (!userRepo.existsById(user.getUserId())) {
 				throw new ITSException("User Id is not found");

@@ -52,11 +52,11 @@ public class UserRestController {
 	
 	@PostMapping
 	public ResponseEntity<User> addUser(@RequestBody User user) throws ITSException{
-		return new ResponseEntity<User>(userService.add(user),HttpStatus.OK);
+		return new ResponseEntity<User>(userService.addUser(user),HttpStatus.OK);
 	} 
 	
 	@PutMapping
 	public ResponseEntity<User> updateUser(@RequestBody User user) throws ITSException{
-		return new ResponseEntity<User>(userService.save(user),HttpStatus.OK);
+		return new ResponseEntity<User>(userService.saveUser(user),HttpStatus.OK);
 	} 
 }

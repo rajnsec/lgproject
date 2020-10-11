@@ -51,11 +51,11 @@ public class InterviewRestController {
 	
 	@PostMapping
 	public ResponseEntity<Interview> addInterviews(@RequestBody Interview interview) throws ITSException{
-		return new ResponseEntity<Interview>(interviewService.add(interview),HttpStatus.OK);
+		return new ResponseEntity<Interview>(interviewService.addInterview(interview),HttpStatus.OK);
 	} 
 	
 	@PutMapping
 	public ResponseEntity<Interview> updateUser(@RequestBody Interview interview) throws ITSException{
-		return new ResponseEntity<Interview>(interviewService.save(interview),HttpStatus.OK);
+		return new ResponseEntity<Interview>(interviewService.saveInterview(interview),HttpStatus.OK);
 	} 
 }

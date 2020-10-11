@@ -7,8 +7,8 @@ import com.wellsfargo.fsd.its.exception.ITSException;
 
 public interface InterviewService {
 	
-	Interview add(Interview interview) throws ITSException;
-	Interview save(Interview interview) throws ITSException;
+	Interview addInterview(Interview interview) throws ITSException;
+	Interview saveInterview(Interview interview) throws ITSException;
 	
 	boolean deleteInterview(int interviewId) throws ITSException;
 	

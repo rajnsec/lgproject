@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-
 import javax.persistence.ManyToMany;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,10 +22,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "interviews"})
 public class User implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer userId;
 	
 	private String firstName;
@@ -37,7 +37,7 @@ public class User implements Serializable{
 	
 	private String mobile;
 	
-	@ManyToMany(mappedBy="users")
+	@ManyToMany(mappedBy="users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Interview> interviews=new ArrayList<>();
 
 	public Integer getUserId() {

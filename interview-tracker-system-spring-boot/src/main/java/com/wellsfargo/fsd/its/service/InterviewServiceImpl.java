@@ -18,7 +18,7 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	@Transactional
-	public Interview add(Interview interview) throws ITSException {
+	public Interview addInterview(Interview interview) throws ITSException {
 		if (interview != null) {
 			if (interviewRepo.existsById(interview.getInterviewId())) {
 				throw new ITSException("Interview Id is already in use");
@@ -31,7 +31,7 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	@Transactional
-	public Interview save(Interview interview) throws ITSException {
+	public Interview saveInterview(Interview interview) throws ITSException {
 		if (interview != null) {
 			if (!interviewRepo.existsById(interview.getInterviewId())) {
 				throw new ITSException("Interview Id is not found");
