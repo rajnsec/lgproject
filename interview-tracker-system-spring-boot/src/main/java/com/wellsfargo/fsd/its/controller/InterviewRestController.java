@@ -23,6 +23,22 @@ import com.wellsfargo.fsd.its.service.InterviewService;
 public class InterviewRestController {
 	@Autowired
 	private InterviewService interviewService;
+	
+	@PostMapping
+	public ResponseEntity<Interview> addInterviews(@RequestBody Interview interview) throws ITSException{
+		return new ResponseEntity<Interview>(interviewService.addInterview(interview),HttpStatus.OK);
+	} 
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteInterviews(@PathVariable("id") int interviewId) throws ITSException{
+		interviewService.deleteInterview(interviewId);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@PutMapping
+	public ResponseEntity<Interview> updateUser(@RequestBody Interview interview) throws ITSException{
+		return new ResponseEntity<Interview>(interviewService.saveInterview(interview),HttpStatus.OK);
+	} 
 
 	@GetMapping
 	public ResponseEntity<List<Interview>> getAllInterviews() throws ITSException{
@@ -43,19 +59,9 @@ public class InterviewRestController {
 		return resp;
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteInterviews(@PathVariable("id") int interviewId) throws ITSException{
-		interviewService.deleteInterview(interviewId);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
 	
-	@PostMapping
-	public ResponseEntity<Interview> addInterviews(@RequestBody Interview interview) throws ITSException{
-		return new ResponseEntity<Interview>(interviewService.addInterview(interview),HttpStatus.OK);
-	} 
 	
-	@PutMapping
-	public ResponseEntity<Interview> updateUser(@RequestBody Interview interview) throws ITSException{
-		return new ResponseEntity<Interview>(interviewService.saveInterview(interview),HttpStatus.OK);
-	} 
+	
+	
+	
 }

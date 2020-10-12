@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "users"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "users"})
 public class Interview implements Serializable {
 	
 	@Id

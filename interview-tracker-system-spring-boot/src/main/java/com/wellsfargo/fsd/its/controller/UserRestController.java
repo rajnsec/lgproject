@@ -30,36 +30,6 @@ public class UserRestController {
 	
 	@Autowired
 	private InterviewService interviewService;
-
-	@GetMapping
-	public ResponseEntity<List<UserDTO>> getAllUsers() throws ITSException{
-		List<UserDTO> resp=null;
-		resp=userService.entityToDto(userService.getAllUsers());
-		return new ResponseEntity<List<UserDTO>>(resp,HttpStatus.OK);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<UserDTO> getUsers(@PathVariable("id") int uid) throws ITSException{
-		ResponseEntity<UserDTO> resp=null;
-		
-		User user = userService.getUser(uid);
-		UserDTO userDTO=new UserDTO();
-		userDTO=userService.entityToDto(user);
-		if(userDTO != null) {
-			resp = new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
-		}else {
-			resp = new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
-		}
-		return resp;
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteUsers(@PathVariable("id") int uid) throws ITSException{
-		User user =userService.getUser(uid);
-		interviewService.removeUserFromInterviews(user);
-		userService.deleteUser(uid);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
 	
 	@PostMapping
 	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) throws ITSException{
@@ -68,12 +38,22 @@ public class UserRestController {
 		userDTO=userService.entityToDto(userService.addUser(user));
 		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 	} 
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteUsers(@PathVariable("id") int uid) throws ITSException{
+		User user =userService.getUser(uid);
+		interviewService.removeUserFromInterviews(user);
+		userService.deleteUser(uid);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 	
-	@PutMapping
-	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO) throws ITSException{
-		User user=new User();
-		user=userService.dtoToEntity(userDTO);		
-		userDTO=userService.entityToDto(userService.saveUser(user));
-		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
-	} 
+	@GetMapping
+	public ResponseEntity<List<UserDTO>> getAllUsers() throws ITSException{
+		List<UserDTO> resp=null;
+		resp=userService.entityToDto(userService.getAllUsers());
+		return new ResponseEntity<List<UserDTO>>(resp,HttpStatus.OK);
+	}
+	
+	
+	
 }

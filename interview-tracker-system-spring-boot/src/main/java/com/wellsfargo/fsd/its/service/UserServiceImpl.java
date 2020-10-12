@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO entityToDto(User user)  {
-		// TODO Auto-generated method stub
+		
 		UserDTO userDTO=new UserDTO();
 		userDTO.setUserId(user.getUserId());
 		userDTO.setFirstName(user.getFirstName());
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> entityToDto(List<User> users) throws ITSException {
-		// TODO Auto-generated method stub
+		
 		return users.stream().map(x->entityToDto(x)).collect(Collectors.toList());
 	}
 

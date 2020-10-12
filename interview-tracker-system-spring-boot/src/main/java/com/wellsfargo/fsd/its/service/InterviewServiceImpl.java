@@ -2,6 +2,7 @@ package com.wellsfargo.fsd.its.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.wellsfargo.fsd.its.dao.InterviewRepository;
 import com.wellsfargo.fsd.its.dao.UserRepository;
+import com.wellsfargo.fsd.its.dto.InterviewDTO;
+import com.wellsfargo.fsd.its.dto.UserDTO;
 import com.wellsfargo.fsd.its.entity.Interview;
 import com.wellsfargo.fsd.its.entity.User;
 import com.wellsfargo.fsd.its.exception.ITSException;
@@ -79,6 +82,39 @@ public class InterviewServiceImpl implements InterviewService {
 			users.remove(user);
 		}
 		
+	}
+
+	@Override
+	public InterviewDTO entityToDto(Interview interview) {
+		InterviewDTO interviewDTO=new InterviewDTO();
+		interviewDTO.setInterviewId(interview.getInterviewId());
+		interviewDTO.setInterviewName(interview.getInterviewName());
+		interviewDTO.setInterviewerName(interview.getInterviewerName());
+		interviewDTO.setInterviewStatus(interview.getInterviewStatus());
+		interviewDTO.setDate(interview.getDate());
+		interviewDTO.setTime(interview.getTime());
+		interviewDTO.setUsersSkills(interview.getUsersSkills());
+		interviewDTO.setRemarks(interview.getRemarks());
+		return interviewDTO;
+	}
+
+	@Override
+	public Interview dtoToEntity(InterviewDTO interviewDTO) throws ITSException {
+		Interview interview=new Interview();
+		interview.setInterviewId(interviewDTO.getInterviewId());
+		interview.setInterviewName(interviewDTO.getInterviewName());
+		interview.setInterviewerName(interviewDTO.getInterviewerName());
+		interview.setInterviewStatus(interviewDTO.getInterviewStatus());
+		interview.setDate(interviewDTO.getDate());
+		interview.setUsersSkills(interviewDTO.getUsersSkills());
+		interview.setTime(interviewDTO.getTime());
+		interview.setRemarks(interviewDTO.getRemarks());
+		return interview;
+	}
+
+	@Override
+	public List<InterviewDTO> entityToDto(List<Interview> interviews) throws ITSException {
+		return interviews.stream().map(x->entityToDto(x)).collect(Collectors.toList());
 	}
 
 }
