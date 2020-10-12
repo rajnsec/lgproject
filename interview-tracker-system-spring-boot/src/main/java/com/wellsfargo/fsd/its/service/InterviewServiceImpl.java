@@ -1,5 +1,6 @@
 package com.wellsfargo.fsd.its.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,18 +39,31 @@ public class InterviewServiceImpl implements InterviewService {
 		}
 		return interview;
 	}
-
 	@Override
 	@Transactional
 	public Interview saveInterview(Interview interview) throws ITSException {
 		if (interview != null) {
 			if (!interviewRepo.existsById(interview.getInterviewId())) {
-				throw new ITSException("Interview Id is not found");
+				throw new ITSException("Contact Id is not found");
 			}
 
 			interviewRepo.save(interview);
 		}
 		return interview;
+	}
+
+
+	@Override
+	@Transactional
+	public boolean changeInterviewStatus(int interviewId, String status) throws ITSException {
+		
+			if (!interviewRepo.existsById(interviewId)) {
+				throw new ITSException("Interview Id is not found");
+			}
+
+			interviewRepo.updateStatus(status,interviewId);
+		
+		return true;
 	}
 
 	@Override
@@ -117,4 +131,65 @@ public class InterviewServiceImpl implements InterviewService {
 		return interviews.stream().map(x->entityToDto(x)).collect(Collectors.toList());
 	}
 
-}
+	@Override
+	public Interview getInterviewByName(String interviewName) throws ITSException {
+		
+		return interviewRepo.findByInterviewName(interviewName);
+	}
+	
+	@Override
+	public Interview getInterviewerByName(String interviewerName) throws ITSException {
+		
+		return interviewRepo.findByInterviewerName(interviewerName);
+	}
+
+	@Override
+	public int getInterviewCount() throws ITSException {
+		// TODO Auto-generated method stub
+		return (int) interviewRepo.count();
+	}
+
+	@Override
+	@Transactional
+	public boolean saveUserToInterview(int interviewId, User user) throws ITSException {
+		
+			if (!interviewRepo.existsById(interviewId)) {
+				throw new ITSException("Interview Id is not found");
+			}
+
+			List<Interview> interviews=interviewRepo.findAll();
+			for(Interview i:interviews)
+			{
+				if(i.getInterviewId()==interviewId)
+				{
+				Set<User> users=i.getUsers();
+				if(!users.isEmpty())
+				{
+				for(User u:users)
+				{
+					if(u.getUserId()==user.getUserId())
+					{
+						throw new ITSException("User is already an attendee");
+					}
+					else
+					{
+						users.add(user);
+						i.setUsers(users);
+					}
+				}
+				
+				}				
+				else
+				{
+					users= new HashSet<User>();
+					users.add(user);
+					i.setUsers(users);
+					
+				}
+				
+			}
+				
+			}
+			return true;
+	}
+	}

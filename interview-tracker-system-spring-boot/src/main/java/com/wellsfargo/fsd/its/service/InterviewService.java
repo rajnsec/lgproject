@@ -11,11 +11,17 @@ import com.wellsfargo.fsd.its.exception.ITSException;
 public interface InterviewService {
 	
 	Interview addInterview(Interview interview) throws ITSException;
-	Interview saveInterview(Interview interview) throws ITSException;
+	boolean changeInterviewStatus(int interviewId, String status) throws ITSException;
+	boolean saveUserToInterview(int interviewId, User user) throws ITSException;
+	
 	
 	boolean deleteInterview(int interviewId) throws ITSException;
 	
 	Interview getInterview(int interviewId) throws ITSException;
+	Interview getInterviewByName(String interviewName) throws ITSException;
+	Interview getInterviewerByName(String interviewerName) throws ITSException;
+	int getInterviewCount() throws ITSException;
+	
 	List<Interview> getAllInterviews() throws ITSException;
 	
 	void removeUserFromInterviews(User user) throws ITSException;
@@ -23,5 +29,8 @@ public interface InterviewService {
 	InterviewDTO entityToDto(Interview interview) throws ITSException;
 	Interview dtoToEntity(InterviewDTO userDTO) throws ITSException;
 	List<InterviewDTO> entityToDto(List<Interview> interviews) throws ITSException;
+	Interview saveInterview(Interview interview) throws ITSException;
+	
+	
 
 }
