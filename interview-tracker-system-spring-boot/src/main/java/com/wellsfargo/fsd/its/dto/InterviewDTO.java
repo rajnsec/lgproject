@@ -3,8 +3,6 @@ package com.wellsfargo.fsd.its.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.wellsfargo.fsd.its.entity.Interview;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

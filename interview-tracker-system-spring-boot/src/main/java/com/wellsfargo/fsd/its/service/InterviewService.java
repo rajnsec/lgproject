@@ -2,6 +2,7 @@ package com.wellsfargo.fsd.its.service;
 
 import java.util.List;
 
+import com.wellsfargo.fsd.its.dto.AttendeeDTO;
 import com.wellsfargo.fsd.its.dto.InterviewDTO;
 import com.wellsfargo.fsd.its.dto.UserDTO;
 import com.wellsfargo.fsd.its.entity.Interview;
@@ -29,6 +30,7 @@ public interface InterviewService {
 	InterviewDTO entityToDto(Interview interview) throws ITSException;
 	Interview dtoToEntity(InterviewDTO userDTO) throws ITSException;
 	List<InterviewDTO> entityToDto(List<Interview> interviews) throws ITSException;
+	AttendeeDTO entityToAttendeeDto(Interview interview) throws ITSException;
 	Interview saveInterview(Interview interview) throws ITSException;
 	
 	

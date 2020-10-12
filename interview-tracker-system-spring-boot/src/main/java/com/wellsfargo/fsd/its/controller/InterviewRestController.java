@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wellsfargo.fsd.its.dto.AttendeeDTO;
 import com.wellsfargo.fsd.its.entity.Interview;
 import com.wellsfargo.fsd.its.entity.User;
 import com.wellsfargo.fsd.its.exception.ITSException;
@@ -92,6 +93,22 @@ public class InterviewRestController {
 		interviewService.saveInterview(interview);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	@GetMapping("/{id}")
+	public ResponseEntity<AttendeeDTO> getInterviews(@PathVariable("id") int interviewId) throws ITSException{
+		ResponseEntity<AttendeeDTO> resp=null;
+		AttendeeDTO attendeeDTO=new AttendeeDTO();
+		
+		Interview interview = interviewService.getInterview(interviewId);
+		attendeeDTO=interviewService.entityToAttendeeDto(interview);
+		
+		if(interview != null) {
+			resp = new ResponseEntity<AttendeeDTO>(attendeeDTO,HttpStatus.OK);
+		}else {
+			resp = new ResponseEntity<AttendeeDTO>(HttpStatus.NOT_FOUND);
+		}
+		return resp;
+	}
+
 	
 	
 	

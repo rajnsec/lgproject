@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.wellsfargo.fsd.its.dao.InterviewRepository;
 import com.wellsfargo.fsd.its.dao.UserRepository;
+import com.wellsfargo.fsd.its.dto.AttendeeDTO;
 import com.wellsfargo.fsd.its.dto.InterviewDTO;
 import com.wellsfargo.fsd.its.dto.UserDTO;
 import com.wellsfargo.fsd.its.entity.Interview;
@@ -192,4 +193,15 @@ public class InterviewServiceImpl implements InterviewService {
 			}
 			return true;
 	}
+	@Override
+	public AttendeeDTO entityToAttendeeDto(Interview interview) {
+		AttendeeDTO attendeeDTO=new AttendeeDTO();
+		attendeeDTO.setInterviewId(interview.getInterviewId());
+		attendeeDTO.setInterviewName(interview.getInterviewName());
+		attendeeDTO.setUsers(interview.getUsers());
+		
+		
+				return attendeeDTO;
+	}
+
 	}
