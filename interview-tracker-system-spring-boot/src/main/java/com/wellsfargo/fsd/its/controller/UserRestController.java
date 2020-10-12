@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wellsfargo.fsd.its.dto.UserDTO;
+import com.wellsfargo.fsd.its.entity.Interview;
 import com.wellsfargo.fsd.its.entity.User;
 import com.wellsfargo.fsd.its.exception.ITSException;
 import com.wellsfargo.fsd.its.service.InterviewService;
@@ -30,20 +32,23 @@ public class UserRestController {
 	private InterviewService interviewService;
 
 	@GetMapping
-	public ResponseEntity<List<User>> getAllUsers() throws ITSException{
-		return new ResponseEntity<List<User>>(userService.getAllUsers(),HttpStatus.OK);
+	public ResponseEntity<List<UserDTO>> getAllUsers() throws ITSException{
+		List<UserDTO> resp=null;
+		resp=userService.entityToDto(userService.getAllUsers());
+		return new ResponseEntity<List<UserDTO>>(resp,HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUsers(@PathVariable("id") int uid) throws ITSException{
-		ResponseEntity<User> resp=null;
+	public ResponseEntity<UserDTO> getUsers(@PathVariable("id") int uid) throws ITSException{
+		ResponseEntity<UserDTO> resp=null;
 		
 		User user = userService.getUser(uid);
-		
-		if(user != null) {
-			resp = new ResponseEntity<User>(user,HttpStatus.OK);
+		UserDTO userDTO=new UserDTO();
+		userDTO=userService.entityToDto(user);
+		if(userDTO != null) {
+			resp = new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 		}else {
-			resp = new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+			resp = new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND);
 		}
 		return resp;
 	}
@@ -57,12 +62,18 @@ public class UserRestController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> addUser(@RequestBody User user) throws ITSException{
-		return new ResponseEntity<User>(userService.addUser(user),HttpStatus.OK);
+	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) throws ITSException{
+		User user=new User();
+		user=userService.dtoToEntity(userDTO);		
+		userDTO=userService.entityToDto(userService.addUser(user));
+		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 	} 
 	
 	@PutMapping
-	public ResponseEntity<User> updateUser(@RequestBody User user) throws ITSException{
-		return new ResponseEntity<User>(userService.saveUser(user),HttpStatus.OK);
+	public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO) throws ITSException{
+		User user=new User();
+		user=userService.dtoToEntity(userDTO);		
+		userDTO=userService.entityToDto(userService.saveUser(user));
+		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 	} 
 }

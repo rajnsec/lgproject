@@ -17,5 +17,6 @@ public interface UserService {
 	List<User> getAllUsers() throws ITSException;
 	
 	UserDTO entityToDto(User user) throws ITSException;
-	User DtoToEntity(UserDTO userDTO) throws ITSException;
+	User dtoToEntity(UserDTO userDTO) throws ITSException;
+	List<UserDTO> entityToDto(List<User> users) throws ITSException;
 }

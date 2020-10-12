@@ -1,6 +1,7 @@
 package com.wellsfargo.fsd.its.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO entityToDto(User user) throws ITSException {
+	public UserDTO entityToDto(User user)  {
 		// TODO Auto-generated method stub
 		UserDTO userDTO=new UserDTO();
 		userDTO.setUserId(user.getUserId());
@@ -78,9 +79,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User DtoToEntity(UserDTO userDTO) throws ITSException {
+	public User dtoToEntity(UserDTO userDTO) throws ITSException {
+		User user=new User();
+		user.setUserId(userDTO.getUserId());
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		user.setEmail(userDTO.getEmail());
+		user.setMobile(userDTO.getMobile());
+		return user;
+	}
+
+	@Override
+	public List<UserDTO> entityToDto(List<User> users) throws ITSException {
 		// TODO Auto-generated method stub
-		return null;
+		return users.stream().map(x->entityToDto(x)).collect(Collectors.toList());
 	}
 
 }
