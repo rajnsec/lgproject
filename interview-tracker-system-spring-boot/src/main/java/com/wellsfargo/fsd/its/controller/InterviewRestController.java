@@ -55,28 +55,28 @@ public class InterviewRestController {
 	}
 	
 	@GetMapping("/interviewName/{interviewName}")
-	public ResponseEntity<InterviewDTO> getInterviewByName(@PathVariable("interviewName") String interviewName) throws ITSException{
-		ResponseEntity<InterviewDTO> resp=null;
-		InterviewDTO interviewDTO=null;
-		Interview interview = interviewService.getInterviewByName(interviewName);
-		interviewDTO=interviewService.entityToDto(interview);
-		if(interviewDTO != null) {
-			resp = new ResponseEntity<InterviewDTO>(interviewDTO,HttpStatus.OK);
+	public ResponseEntity<List<InterviewDTO>> getInterviewByName(@PathVariable("interviewName") String interviewName) throws ITSException{
+		ResponseEntity<List<InterviewDTO>> resp=null;
+		List<InterviewDTO> interviewsDTO=null;
+		List<Interview> interviews = interviewService.getInterviewByName(interviewName);
+		interviewsDTO=interviewService.entityToDto(interviews);
+		if(interviewsDTO!= null) {
+			resp = new ResponseEntity<List<InterviewDTO>>(interviewsDTO,HttpStatus.OK);
 		}else {
-			resp = new ResponseEntity<InterviewDTO>(HttpStatus.NOT_FOUND);
+			resp = new ResponseEntity<List<InterviewDTO>>(HttpStatus.NOT_FOUND);
 		}
 		return resp;
 	}
 	@GetMapping("/interviewerName/{interviewerName}")
-	public ResponseEntity<InterviewDTO> getInterviewByInterviewer(@PathVariable("interviewerName") String interviewerName) throws ITSException{
-		ResponseEntity<InterviewDTO> resp=null;
-		InterviewDTO interviewDTO=null;		
-		Interview interview = interviewService.getInterviewerByName(interviewerName);
-		interviewDTO=interviewService.entityToDto(interview);
-		if(interviewDTO != null) {
-			resp = new ResponseEntity<InterviewDTO>(interviewDTO,HttpStatus.OK);
+	public ResponseEntity<List<InterviewDTO>> getInterviewByInterviewer(@PathVariable("interviewerName") String interviewerName) throws ITSException{
+		ResponseEntity<List<InterviewDTO>> resp=null;
+		List<InterviewDTO> interviewsDTO=null;		
+		List<Interview> interviews = interviewService.getInterviewerByName(interviewerName);
+		interviewsDTO=interviewService.entityToDto(interviews);
+		if(interviewsDTO != null) {
+			resp = new ResponseEntity<List<InterviewDTO>>(interviewsDTO,HttpStatus.OK);
 		}else {
-			resp = new ResponseEntity<InterviewDTO>(HttpStatus.NOT_FOUND);
+			resp = new ResponseEntity<List<InterviewDTO>>(HttpStatus.NOT_FOUND);
 		}
 		return resp;
 	}

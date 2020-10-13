@@ -19,8 +19,8 @@ public interface InterviewService {
 	boolean deleteInterview(int interviewId) throws ITSException;
 	
 	Interview getInterview(int interviewId) throws ITSException;
-	Interview getInterviewByName(String interviewName) throws ITSException;
-	Interview getInterviewerByName(String interviewerName) throws ITSException;
+	List<Interview> getInterviewByName(String interviewName) throws ITSException;
+	List<Interview> getInterviewerByName(String interviewerName) throws ITSException;
 	int getInterviewCount() throws ITSException;
 	
 	List<Interview> getAllInterviews() throws ITSException;

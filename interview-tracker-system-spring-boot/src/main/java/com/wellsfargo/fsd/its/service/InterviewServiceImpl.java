@@ -133,13 +133,13 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 	@Override
-	public Interview getInterviewByName(String interviewName) throws ITSException {
+	public List<Interview> getInterviewByName(String interviewName) throws ITSException {
 		
 		return interviewRepo.findByInterviewName(interviewName);
 	}
 	
 	@Override
-	public Interview getInterviewerByName(String interviewerName) throws ITSException {
+	public List<Interview> getInterviewerByName(String interviewerName) throws ITSException {
 		
 		return interviewRepo.findByInterviewerName(interviewerName);
 	}

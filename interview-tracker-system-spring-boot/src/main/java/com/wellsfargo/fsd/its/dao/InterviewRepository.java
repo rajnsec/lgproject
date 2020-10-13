@@ -1,5 +1,7 @@
 package com.wellsfargo.fsd.its.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,9 +12,9 @@ import com.wellsfargo.fsd.its.entity.Interview;
 
 public interface InterviewRepository extends JpaRepository<Interview, Integer> {
 	
-	Interview findByInterviewName(String interviewName);
+	List<Interview> findByInterviewName(String interviewName);
 	
-	Interview findByInterviewerName(String interviewerName);
+	List<Interview> findByInterviewerName(String interviewerName);
 	
 	 @Modifying
 	@Query("UPDATE Interview i set i.interviewStatus=:status WHERE i.interviewId=:id")
